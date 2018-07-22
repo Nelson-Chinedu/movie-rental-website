@@ -40,8 +40,8 @@
 		  <li class="nav-item"><a class="nav-link" href="#contact">contact us</a></li>
 	  </ul>
 		<ul class="navbar-nav ml-auto">
-      <form class="form-inline">
-   			 <input class="form-control mr-sm-2" type="text" placeholder="Search movie">
+      <form class="form-inline" id="formSearch">
+   			 <input class="form-control mr-sm-2" type="text" id="search" placeholder="Search movie" autocomplete="off" required="required">
     		 <button class="btn btn-info btn-search" type="submit">Search</button>
  		  </form>
     </ul>
@@ -140,13 +140,13 @@
 	  	<h2 class="article-b-caption">shhhhh!!! Enter your email and get exclusive deals you will not find anywhere</h2>
 			</div>
 			<div class="col-md-12">
-			  <form>
+			  <form method="post" id="formSub">
 			  	<div class="form-group">
 					  <label class="sr-only" for="email">Email address:</label>
-						  <input type="email" class="form-control inputSubscribe" placeholder="Enter email address" required="required">
+						  <input type="email" class="form-control inputSubscribe" id="email" placeholder="Enter email address" autocomplete="off" required="required">
 						</div>
 						<div class="form-group">
-						  <button class="btn btn-info btn-lg btn-subscribe">Subscribe</button>
+						  <button class="btn btn-info btn-lg btn-subscribe" id="btnSub">Subscribe</button>
 						</div>
 					</form>
 					</div>
@@ -243,18 +243,18 @@
 				<p>info@xboxfilms.com</p>
 			</div>
 			<div class="col-md-6">
-			  <form>
+			  <form id="formContact" method="post">
 				  <div class="form-group form-contact">
-					  <label for="name">Name:</label>
-						<input type="text" class="form-control" id="name" placeholder="Enter Name" required="required">
+					  <label for="name">Name: <span class="error" id="error_name"></span></label>
+						<input type="text" class="form-control" id="contact_name" placeholder="Enter Name" autocomplete="off">
 					</div>
 					<div class="form-group form-contact">
-					  <label for="email">Email Address:</label>
-						<input type="email" class="form-control" id="email" placeholder="Enter Email" required="required">
+					  <label for="email">Email Address: <span class="error" id="error_email"></span></label>
+						<input type="email" class="form-control" id="contact_email" placeholder="Enter Email" autocomplete="off" >
 					</div>
 					<div class="form-group form-contact">
-					  <label for="msg">Message:</label>
-						<textarea class="form-control" id="msg" cols="30" rows="10" required="required"></textarea>
+					  <label for="msg">Message: <span class="error" id="error_message"></span></label>
+						<textarea class="form-control" id="contact_message" cols="30" rows="10" autocomplete="off" ></textarea>
 					</div>
 					<button type="submit" class="btn btn-info btn-lg btn-send">Send Message</button>
         </form> 
@@ -262,6 +262,7 @@
 		</div>
 	</div>
 </div>
+ 
 <div class="article-d">
   <div class="container"> 
 		<div class="row">
@@ -463,7 +464,9 @@
 </div>  <!-- end of Modal content for Modal8-->
 </section>
 
-<script src="js/jquery.min.js"></script>
+
 <script src="js/bootstrap.min.js"></script>    
+<script src="js/jquery.min.js"></script>
+<script src="js/index.js"></script>
 </body>
 </html>
