@@ -23,6 +23,7 @@ $("#formSub").bind('submit',function(e){
 		alert("Please enter your Email address");
 	}else{
 		alert("Thanks for subscribing");
+		$("#email").val('');
 	}
 });
 
