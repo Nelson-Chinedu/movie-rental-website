@@ -17,6 +17,6 @@
         
     }
     ?>
- <p>Total number of leap years is <span id="total">TEN</span></p>
+ <p>Total number of leap years is TEN</p>
 </body>
 </html>
