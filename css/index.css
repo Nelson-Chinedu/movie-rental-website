@@ -162,6 +162,15 @@
 .error{
 	color:red;
 }
+label .text-danger{
+	margin:0;
+	padding:0;
+}
+.feedback{
+	margin: 10em 0 0;
+	text-align: center; 
+	/*height: 200px;*/
+}
 
 /*mobile*/
 @media only screen and (max-width:480px){
