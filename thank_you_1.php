@@ -1,3 +1,12 @@
+<?php
+$to =  $_POST['email'];
+$subject = "Acknolegment mail";
+$txt = "Hello world!";
+$headers = "From: xbox@example.com";
+
+mail($to,$subject,$txt,$headers);
+?> 
+
 <?php 
 $emailSub = "";
 // error variables
@@ -34,14 +43,7 @@ if(isset($_POST['subscribe'])){
 	}
 } //end of script for newsletter form
 ?>
-<?php
-$to =  $_POST['email'];
-$subject = "Acknolegment mail";
-$txt = "Hello world!";
-$headers = "From: xbox@example.com";
 
-mail($to,$subject,$txt,$headers);
-?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
