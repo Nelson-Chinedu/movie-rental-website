@@ -1,7 +1,7 @@
 <?php
 $to =  $_POST['email'];
 $subject = "Acknolegment mail";
-$txt = "Hello  <?php $_POST['name']; ?> Thank you for contacting us we will reach out to you within 24hrs if your message requires response.";
+$txt = "Hello Thank you for contacting us we will reach out to you within 24hrs if your message requires response.";
 $headers = "From: xbox@example.com";
 
 mail($to,$subject,$txt,$headers);

@@ -1,6 +1,10 @@
 <?php
 session_start();
-$SESSION['$loginuser']=$_POST['loginUname'];
+include ('config/db.php');
+
+
+$res=mysql_query("SELECT * FROM sign_up WHERE `username`='$username'");
+$row=mysql_fetch_array($res);
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +17,6 @@ $SESSION['$loginuser']=$_POST['loginUname'];
   <meta name="description" content="Animal store">
   <meta name="keywords" content="HTML,CSS,bootstrap 4,film,movie,rental-store">
   <meta name="author" content="Chinedu Nelson">
-	<link rel="icon" href="image/icon/icon.svg" type="image/ico">
 	<link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
 	<!--<script src="js/index.js"></script>-->
@@ -39,20 +42,30 @@ $SESSION['$loginuser']=$_POST['loginUname'];
 	    </button>
   <div id="myNav" class="collapse navbar-collapse">
 	  <ul class="navbar-nav top2">
-		  <li class="nav-item"><a class="nav-link" href="index.php">home</a></li>
+		  <li class="nav-item"><a class="nav-link" href="userPage.php">home</a></li>
 		  <li class="nav-item"><a class="nav-link" href="#about">about us</a></li>
 		  <li class="nav-item"><a class="nav-link" href="#comingSoon">coming soon</a></li>
 		  <li class="nav-item"><a class="nav-link" href="#retailPromo">promo &amp; retail</a></li>
-		  <li class="nav-item"><a class="nav-link" href="#trending">trending</a></li>
+		  <!--<li class="nav-item"><a class="nav-link" href="#trending">trending</a></li>-->
+			<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Movies</a>
+         <div class="dropdown-menu">
+           <a class="dropdown-item" href ="actionMov.php">Action</a>
+           <a class="dropdown-item" href="dramaMov.php">Drama</a>
+			     <a class="dropdown-item" href="romanceMov.php">Romance</a>
+           <a class="dropdown-item" href="comedyMov.php">Comedy</a>
+         </div>
+      </li>
 		  <li class="nav-item"><a class="nav-link" href="#contact">contact us</a></li>
-	  </ul>
-		<ul class="navbar-nav ml-auto">
-      <!--<form class="form-inline" id="formSearch">
-   			 <input class="form-control mr-sm-2" type="text" id="search" placeholder="Search movie" autocomplete="off">
-    		 <button class="btn btn-info btn-search" type="submit">Search</button>
- 		  </form>-->
-			<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#myModal9" href="#">Login</a></li>
-		  <li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#myModal10" href="#">Signup</a></li>
+		</ul>
+		<ul class="navbar-nav justify-content-end ml-auto">
+			<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Welcome, <?php echo $row['firstname'];?> <img src="image/user/user.svg" width="20px" height="15px"></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" data-toggle="modal" data-target="#myModal10" href ="#">Profile</a>
+              <a class="dropdown-item" data-toggle="modal" data-target="#myModal11" href="#">Upload movie</a>
+							<a class="dropdown-item" data-toggle="modal" data-target="#myModal12" href="#">Change password</a>
+             <a class="dropdown-item" href="logout.php">Logout</a>
+            </div>
+            </li>
     </ul>
   </div>
 </nav>
@@ -166,7 +179,7 @@ $SESSION['$loginuser']=$_POST['loginUname'];
 <div class="container">
   <div class="row">
 	  <div class="col-md-12">
-		  <h2 class="article-caption" id="trending"><span class="caption-color">trending</span> movies</h2>
+		  <h2 class="article-caption" id="trending"><span class="caption-color">action</span> movies</h2>
 		</div>
 	</div>
 	<div class="row" id="card">
@@ -311,21 +324,13 @@ $SESSION['$loginuser']=$_POST['loginUname'];
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <img src="image/trending/img2.png" alt="image"> <p>Dwayne Johnson stars as primatologist Davis Okoye, a man who keeps people at
+        <img src="image/trending/img2.png" alt=""> <p>Dwayne Johnson stars as primatologist Davis Okoye, a man who keeps people at
 				 a distance but shares an unshakable bond with George, the extraordinary intelligent, incredibly rare albino silverback gorilla
 				 who has been in his care since he rescued the young orphan from poachers. But a rogue genetic experiment gone awry mutates this gentle 
 				 ape into a raging creature of enormous size.</p>
-				 <p>$5.00</p>
-				 <span>
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					</span>
-			</div>
+      </div>
       <div class="modal-footer">
-	    <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target="#myModal9">Buy movie</button>
+	    <button type="button" class="btn btn-default" data-dismiss="">Rent movie</button>
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -341,21 +346,13 @@ $SESSION['$loginuser']=$_POST['loginUname'];
 				 <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-       <img src="image/trending/tr3.jpg" alt="image"> <p>Thomas (Dylan O'Brien), a teenager arrives in a glade at the center of a
+       <img src="image/trending/tr3.jpg" alt=""> <p>Thomas (Dylan O'Brien), a teenager arrives in a glade at the center of a
 				 giant labtrinth. like the other youths dumped there before him, he has memory of his previuos life. Thomas quickly becomes
 				 part of the group and soon after demonstrates a unique perspective that scores him a promotion to Runner status - 
 				 those who patrol the always changing maze to find an escape route.</p>
-				 <p>$4.00</p>
-				 <span>
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star2.png" width="30px" height="30px">
-					</span>
       </div>
       <div class="modal-footer">
-	      <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target="#myModal9">Buy movie</button>
+	      <button type="button" class="btn btn-default" data-dismiss="modal">Rent movie</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -371,20 +368,12 @@ $SESSION['$loginuser']=$_POST['loginUname'];
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
     <div class="modal-body">
-       <img src="image/trending/tr2.jpg" alt="image"> <p>Former FBI Hostage Rescue Team leader and U.S war veteran will for now assesses security
+       <img src="image/trending/tr2.jpg" alt=""> <p>Former FBI Hostage Rescue Team leader and U.S war veteran will for now assesses security
 				 for skyscrapers. He's on assignment in china when he finds the tallest, safest building in the world suddenly ablaze, and
 				 he's been framed for it.</p>
-				 <p>$5.00</p>
-				 <span>
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					</span>
     </div>
     <div class="modal-footer">
-	      <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target="#myModal9">Buy movie</button>
+	      <button type="button" class="btn btn-default" data-dismiss="modal">Rent movie</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -400,21 +389,13 @@ $SESSION['$loginuser']=$_POST['loginUname'];
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <img src="image/trending/img7.png" alt="image"> <p>Wisecracking mecenary Deadpool meets Russell, an angry teenage mutant who lives at an 
+        <img src="image/trending/img7.png" alt=""> <p>Wisecracking mecenary Deadpool meets Russell, an angry teenage mutant who lives at an 
 				 orphanage. when Russell becomes the target of cable - a genetically enhanced soldier from the future - Deadpool realizes that he'll
 				 need some help saving the boy from such a superior enemy. He soon joins forces with Bedlam, Shatterster, Domino and other powerful
 				 mutants to protect young Russell from cableand his advanced weaponry.</p>
-				 <p>$2.00</p>
-				 <span>
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star2.png" width="30px" height="30px">
-					<img src="image/user/star2.png" width="30px" height="30px">
-					</span>
       </div>
       <div class="modal-footer">
-	      <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target="#myModal9">Buy movie</button>
+	      <button type="button" class="btn btn-default" data-dismiss="modal">Rent movie</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -430,20 +411,12 @@ $SESSION['$loginuser']=$_POST['loginUname'];
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <img src="image/trending/tr4.jpg" alt="image"> <p>Storks deliver babies - or at least they used to. Now, they deliver packages for
+        <img src="image/trending/tr4.jpg" alt=""> <p>Storks deliver babies - or at least they used to. Now, they deliver packages for
 				 a global internet retail giant. Junior and his friend Tulip (Katie Crown), the only human on stork Mountain, race against time to make
 				 their first baby drop before the boss (Kelsey Grammer) finds out.</p>
-				 <p>$4.00</p>
-				 <span>
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star2.png" width="30px" height="30px">
-					</span>
       </div>
       <div class="modal-footer">
-	      <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target="#myModal9">Buy movie</button>
+	      <button type="button" class="btn btn-default" data-dismiss="modal">Rent movie</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -459,21 +432,13 @@ $SESSION['$loginuser']=$_POST['loginUname'];
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <img src="image/trending/tr6.jpg" alt="image"> <p>iron man, thor, the hulk and the rest of the avengers unite to battle their
+        <img src="image/trending/tr6.jpg" alt=""> <p>iron man, thor, the hulk and the rest of the avengers unite to battle their
 				 most powerful enemy yet - the evil thanos. on a mission to collect all six infinity stones, thanos plans to use the
 				 artifacts to inflict his twisted will on reality. the fate of the planet and existence itself has never been more
 				 uncertain as everything the avengers have fought for has led up to this moment.</p>
-				 <p>$5.00</p>
-				 <span>
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					</span>
       </div>
       <div class="modal-footer">
-	    <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target="#myModal9">Buy movie</button>
+	    <button type="button" class="btn btn-default" data-dismiss="modal">Rent movie</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -489,20 +454,12 @@ $SESSION['$loginuser']=$_POST['loginUname'];
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <img src="image/trending/tr5.jpg" alt="image"> <p>young han solo finds adventure when he joins a gang of galactic smugglers 
+        <img src="image/trending/tr5.jpg" alt=""> <p>young han solo finds adventure when he joins a gang of galactic smugglers 
 				including a 196-year old wookie named chewbacca. indebted to the gangstar dryden vos, the crew devises a daring plan to travel 
 				to the mining planet kessel to steal a batch of valuable coaxium.</p>
-				<p>$3.00</p>
-				<span>
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star2.png" width="30px" height="30px">
-					<img src="image/user/star2.png" width="30px" height="30px">
-					</span>
       </div>
       <div class="modal-footer">
-	      <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target="#myModal9">Buy movie</button>
+	      <button type="button" class="btn btn-default" data-dismiss="modal">Rent movie</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -518,84 +475,49 @@ $SESSION['$loginuser']=$_POST['loginUname'];
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <img src="image/trending/img2.png" alt="image"> <p>PRIMATOLOGIST DAVIS OKOYE SHARES AN UNSHAKABLE BOND WITH GEORGE,
+        <img src="image/trending/img2.png" alt=""> <p>PRIMATOLOGIST DAVIS OKOYE SHARES AN UNSHAKABLE BOND WITH GEORGE,
            THE EXTRAORDINARY INTELLIGENT GORILLA WHO HAS BEEN IN HIS CARE SINCE BIRTH. BUT A ROGUE GENETIC EXPERIMENT GONE.</p>
-					 <p>$4.00</p>
-					 <span>
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					<img src="image/user/star1.png" width="30px" height="30px">
-					</span>
       </div>
       <div class="modal-footer">
-	      <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target="#myModal9">Buy movie</button>
+	      <button type="button" class="btn btn-default" data-dismiss="modal">Rent movie</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>  <!-- end of Modal content for Modal8-->
-<div id="myModal9" class="modal fade" role="dialog" data-backdrop='static'>  <!-- Modal content for Modal9 -->
+
+<div id="myModal10" class="modal fade" role="dialog">  <!-- Modal content for Modal10 -->
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Login</h4>
+        <h4 class="modal-title" style="text-align:center;">Profile</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-				<form id="loginForm" name="userLogin" method="post" action="loginscript.php">
+				<form id="updateForm" name="update" method="post" action='updatescript.php'>
 				  <div class="form-group form-contact">
-					  <label for="username">username</label>
-						<input type="text" class="form-control" id="login_name" name="loginUname" placeholder="Username" value="<?php echo $name; ?>" autocomplete="off">
+					  <label for="username">Firstname</label>
+						<input type="text" class="form-control" id="update_fname" name="updateFname" placeholder="Firstname" value="<?php echo $row['firstname'];?>" autocomplete="off">
 					</div>
-					<div class="form-group form-contact">
+					 <div class="form-group form-contact">
+					  <label for="username">Lastname</label>
+						<input type="text" class="form-control" id="update_lname" name="updateLname" placeholder="Lastname" value="<?php echo $row['lastname'];?>" autocomplete="off">
+					</div>
+					 <div class="form-group form-contact">
+					  <label for="username">Email address</label>
+						<input type="email" class="form-control" id="update_email" name="updateEmail" placeholder="Enail Address" value="<?php echo $row['email'];?>" autocomplete="off">
+					</div>
+					 <div class="form-group form-contact" hidden>
+					  <label for="username" >Username</label>
+						<input type="text" class="form-control" id="update_uname" name="updateUname" placeholder="Username" value="<?php echo $row['username'];?>" autocomplete="off" hidden>
+					</div>
+					<div class="form-group form-contact" hidden>
 					  <label for="password">Password</label>
-						<input type="password" class="form-control" id="login_pwd" name="loginPwd" value="<?php echo $email; ?>" placeholder="Password" autocomplete="off" >
+						<input type="password" class="form-control" id="update_pwd" name="updatePwd"  placeholder="Password" autocomplete="off" hidden>
 					</div>
-					<button type="submit" class="btn btn-info btn-md" name="login_Form" >Login</button>
-					<label> <a data-toggle="modal" data-dismiss="modal" data-target="#myModal11" href="#">forget password?</a></label>
-					<label> Not yet a member <a data-toggle="modal" data-dismiss="modal" data-target="#myModal10" href ="#">signup</a></label>
-        </form> 
-      </div>
-    </div>
-  </div>
-</div>  <!-- end of Modal content for Modal9-->
-<div id="myModal10" class="modal fade" role="dialog" data-backdrop='static'>  <!-- Modal content for Modal10 -->
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" style="text-align:center;">Signup</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-				<form id="signupForm" name="signupUser" method="post" action="signupscript.php" onSubmit="return check();">
-				  <div class="form-group form-contact">
-					  <label for="firstname">Firstname</label>
-						<input type="text" class="form-control" id="signup_fname" name="signupFname" placeholder="Firstname" value="<?php echo $name; ?>" autocomplete="off">
-					</div>
-					 <div class="form-group form-contact">
-					  <label for="lastname">Lastname</label>
-						<input type="text" class="form-control" id="signup_lname" name="signupLname" placeholder="Lastname" value="<?php echo $name; ?>" autocomplete="off">
-					</div>
-					 <div class="form-group form-contact">
-					  <label for="Email address">Email address</label>
-						<input type="email" class="form-control" id="signup_email" name="signupEmail" placeholder="Enail Address" value="<?php echo $name; ?>" autocomplete="off">
-					</div>
-					 <div class="form-group form-contact">
-					  <label for="username">Username</label>
-						<input type="text" class="form-control" id="signup_uname" name="signupUname" placeholder="Username" value="<?php echo $name; ?>" autocomplete="off">
-					</div>
-					<div class="form-group form-contact">
-					  <label for="password">Password</label>
-						<input type="password" class="form-control" id="signup_pwd" name="signupPwd" value="<?php echo $email; ?>" placeholder="Password" autocomplete="off" >
-					</div>
-					<button type="submit" class="btn btn-info btn-md" name="userSignupForm" >Signup</button>
-					<label> Already a member <a data-toggle="modal" data-dismiss="modal" data-target="#myModal9" href ="#">login</a></label>
+					<button type="submit" class="btn btn-info btn-md" name="updateUser" id="updateProfile">Update</button>
         </form> 
       </div>
     </div>
@@ -607,23 +529,82 @@ $SESSION['$loginuser']=$_POST['loginUname'];
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" style="text-align:center;">Forget password</h4>
+        <h4 class="modal-title" style="text-align:center;">Upload a movie</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-				<form id="resetForm" name="resetPassword" method="post" action="resetscript.php">
+				<form id="updateForm" name="update" method="post" action='updatescript.php'>
 				  <div class="form-group form-contact">
-					  <label for="email">Enter Email address</label>
-						<input type="email" class="form-control" id="reset_password" name="resetPwd" placeholder="Email address" value="<?php echo $name; ?>" autocomplete="off">
+					  <label for="username">Movie name</label>
+						<input type="text" class="form-control" id="update_fname" name="updateFname" placeholder="Movie name" autocomplete="off">
 					</div>
-					<button type="submit" class="btn btn-info btn-md" name="userResetForm" >Reset password</button>
-					<label> Click <a data-toggle="modal" data-dismiss="modal" data-target="#myModal9" href ="#"> here </a> to login</label>
+					 <div class="form-group form-contact">
+					  <label for="username">Genre</label>
+						<select class="form-control">
+						 <option>Choose Genre</option>
+						 <option>Action</option>
+						 <option>Drama</option>
+						 <option>Romance</option>
+						 <option>Comedy</option>
+						</select>
+					</div>
+					 <div class="form-group form-contact">
+					  <label for="username">PG</label>
+							<select class="form-control">
+						 <option>Choose PG</option>
+						 <option>G</option>
+						 <option>13</option>
+						 <option>16</option>
+						</select>
+					</div>
+					 <div class="form-group form-contact">
+					  <label for="username" >Movie info</label>
+						 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+					</div>
+					<div class="form-group form-contact">
+					  <label for="password">upload</label>
+						<input type="file" class="form-control-file" id="exampleFormControlFile1">
+					</div>
+					<button type="submit" class="btn btn-info btn-md" name="updateUser" id="updateProfile">Upload</button>
         </form> 
       </div>
     </div>
   </div>
 </div>  <!-- end of Modal content for Modal11-->
+<div id="myModal12" class="modal fade" role="dialog" data-backdrop='static'>  <!-- Modal content for Modal11 -->
+  <div class="modal-dialog">
 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="text-align:center;">Change password</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+			<label><?php echo $errorMsg ?></label>
+      <div class="modal-body">
+				<form id="changePwdForm" name="changePassword" method="post" action="">
+				   <div class="form-group form-contact">
+					  <label for="username" >Username</label>
+						<input type="text" class="form-control" id="change_uname" name="changeUname" placeholder="Username" value="<?php echo $row['username'];?>" autocomplete="off">
+					</div>
+				  <div class="form-group form-contact">
+					  <label for="password">Old password</label>
+						<input type="password" class="form-control" id="change_password" name="changePwdOld" placeholder="Enter old password">
+					</div>
+					<div class="form-group form-contact">
+					  <label for="password">New password</label>
+						<input type="password" class="form-control" id="change_password_old" name="changePwdNew" placeholder="Enter new password">
+					</div>
+					<div class="form-group form-contact">
+					  <label for="password">Confirm new password</label>
+						<input type="password" class="form-control" id="change_password_confirm" name="changePwdCon" placeholder="Confirm new password">
+					</div>
+					<button type="submit" class="btn btn-info btn-md" name="changeUserPwd" >Change password</button>
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>  <!-- end of Modal content for Modal12-->
 </section>
 
 

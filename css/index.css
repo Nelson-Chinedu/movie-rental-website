@@ -88,10 +88,13 @@
 	margin:30px auto 0px;
 }
 .form-group .btn-subscribe, .form-group .btn-send{
-	background: transparent;
 	outline:none;
 	border: 1px solid white;
 	letter-spacing: 1px;
+}
+
+.form-group .btn-subscribe:hover{
+	background: transparent;
 }
 .form-group input[type=email]{
 	padding:12px 14px;
@@ -101,6 +104,10 @@
 }
 .thumbnail-caption{
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.thumbnail-caption:hover{
+	transform: translateY(-10px);
+	cursor: pointer;
 }
 .thumbnail-caption span{
 	float: right;
