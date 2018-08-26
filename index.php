@@ -16,7 +16,6 @@ $SESSION['$loginuser']=$_POST['loginUname'];
 	<link rel="icon" href="image/icon/icon.svg" type="image/ico">
 	<link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-	<!--<script src="js/index.js"></script>-->
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
 <header>
@@ -47,10 +46,6 @@ $SESSION['$loginuser']=$_POST['loginUname'];
 		  <li class="nav-item"><a class="nav-link" href="#contact">contact us</a></li>
 	  </ul>
 		<ul class="navbar-nav ml-auto">
-      <!--<form class="form-inline" id="formSearch">
-   			 <input class="form-control mr-sm-2" type="text" id="search" placeholder="Search movie" autocomplete="off">
-    		 <button class="btn btn-info btn-search" type="submit">Search</button>
- 		  </form>-->
 			<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#myModal9" href="#">Login</a></li>
 		  <li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#myModal10" href="#">Signup</a></li>
     </ul>

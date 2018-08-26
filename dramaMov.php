@@ -19,7 +19,6 @@ $row=mysql_fetch_array($res);
   <meta name="author" content="Chinedu Nelson">
 	<link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-	<!--<script src="js/index.js"></script>-->
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
 <header>
@@ -46,7 +45,6 @@ $row=mysql_fetch_array($res);
 		  <li class="nav-item"><a class="nav-link" href="#about">about us</a></li>
 		  <li class="nav-item"><a class="nav-link" href="#comingSoon">coming soon</a></li>
 		  <li class="nav-item"><a class="nav-link" href="#retailPromo">promo &amp; retail</a></li>
-		  <!--<li class="nav-item"><a class="nav-link" href="#trending">trending</a></li>-->
 			<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Movies</a>
          <div class="dropdown-menu">
            <a class="dropdown-item" href ="actionMov.php">Action</a>
@@ -145,10 +143,10 @@ $row=mysql_fetch_array($res);
 			  </div>
 		  	<div class="carousel-item">
 				  	<img src="image/trending/img4.png" alt="" height="auto" />
-					  <img src="image/trending/img7.png" alt="" height="auto" />
-					  <img src="image/trending/img4.png" alt="" height="auto" />
+					<img src="image/trending/img7.png" alt="" height="auto" />
+					<img src="image/trending/img4.png" alt="" height="auto" />
 				  	<img src="image/trending/img3.png" alt="" height="auto" />
-						<img src="image/trending/img7.png" alt="" height="auto" />
+					<img src="image/trending/img7.png" alt="" height="auto" />
 			 </div>
 	  	</div>
 	 </div>
